@@ -42,7 +42,7 @@ public class CLL {
             return;
         }
 
-        if (head == tail){
+        if (head == tail && val == head.val){
             head = null;
             tail = null;
             return;
