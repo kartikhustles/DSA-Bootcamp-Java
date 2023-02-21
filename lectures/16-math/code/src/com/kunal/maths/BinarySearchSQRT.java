@@ -8,6 +8,7 @@ public class BinarySearchSQRT {
         System.out.printf("%.3f", sqrt(n, p));
     }
 
+    // Giving wrong ouput for (n > 45 & perfect sq. root)
     // Time: O(log(n))
     static double sqrt(int n, int p) {
         int s = 0;
@@ -30,6 +31,7 @@ public class BinarySearchSQRT {
             }
         }
         double incr = 0.1;
+        root = e + incr;
         for (int i = 0; i < p; i++) {
             while (root * root <= n) {
                 root += incr;
