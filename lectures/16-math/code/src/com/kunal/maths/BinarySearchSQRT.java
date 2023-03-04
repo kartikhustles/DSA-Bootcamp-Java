@@ -4,42 +4,54 @@ public class BinarySearchSQRT {
     public static void main(String[] args) {
         int n = 40;
         int p = 3;
-
-        System.out.printf("%.3f", sqrt(n, p));
+        System.out.printf(sqrt(n, p));
+//         System.out.printf("%.3f", sqrt(n, p));
     }
 
     // Giving wrong ouput for (n > 45 & perfect sq. root)
     // Time: O(log(n))
-    static double sqrt(int n, int p) {
-        int s = 0;
-        int e = n;
+    static float sqrt(int number, int precision) {
+        int start = 0, end = number;
+        int mid = 0;
 
-        double root = 0.0;
+        // variable to store the answer
+        double ans = 0.0;
 
-        while (s <= e) {
-            int m = s + (e - s) / 2;
+        // for computing integral part
+        // of square root of number
+        while (start <= end) {
+            mid = (start + end) / 2;
 
-            if (m * m == n) {
-                return m;
+            if (mid * mid == number) {
+                return mid;
             }
 
-            if (m * m > n) {
-                e = m - 1;
-            } else {
-                s = m + 1;
-                root = m;
+            // incrementing start if integral
+            // part lies on right side of the mid
+            else if (mid * mid < number) {
+                start = mid + 1;
+            }
+
+            // decrementing end if integral part
+            // lies on the left side of the mid
+            else {
+                end = mid - 1;
             }
         }
-        double incr = 0.1;
-        root = e + incr;
-        for (int i = 0; i < p; i++) {
-            while (root * root <= n) {
-                root += incr;
-            }
-            root -= incr;
-            incr /= 10;
-        }
 
-        return root;
+        // For computing the fractional part
+        // of square root upto given precision
+        double increment = 0.1;
+        ans = mid - 1 + increment;
+        for (int i = 0; i < precision; i++) {
+            while (ans * ans <= number) {
+                ans += increment;
+            }
+
+            // loop terminates when ans * ans > number
+            ans = ans - increment;
+            increment = increment / 10;
+        }
+        return (float) ans;
     }
 }
